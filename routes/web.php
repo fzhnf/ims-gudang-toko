@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return ['Laravel' => app()->version()];
+    return Inertia::render('Welcome');
 });
+
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::get('dashboard', [DashboardController::class, 'show'])->middleware(['auth'])->name('dashboard');
+
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/thankyou', function (){
+  return Inertia::render('Auth/Thankyou');
+})->name('thankyou');
+
+Route::get('/users', function (){
+  return Inertia::render('Users/Index', [
+    'name' => 'Faiz',
+    'company' => 'ITK',
+  ]);
+});
+
 
 require __DIR__.'/auth.php';
