@@ -1,1 +1,1 @@
-show.blade.php
+@include('components.filter-hover')

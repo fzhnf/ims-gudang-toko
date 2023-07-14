@@ -30,7 +30,7 @@ class KategoriController extends Controller
 
     public function show($id) {
         $kategori = Kategori::find($id);
-        return $kategori;
+        return response()->json($kategori);
     }
 
     public function store(Request $request) {
@@ -52,5 +52,7 @@ class KategoriController extends Controller
         Kategori::destroy($id);
         return 'success';
     }
+
+
 
 }
