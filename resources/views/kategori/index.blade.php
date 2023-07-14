@@ -1,9 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Daftar Kategori') }}
-            @include('components.search-bar')                    
+            {{ __('Daftar Kategori') }}                    
         </h2>
+        <div class="flex mt-5">
+            @include('components.search-bar')
+        </div>
     </x-slot>
 
     <div class="py-12">
