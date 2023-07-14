@@ -10,7 +10,7 @@
                     </a>
                 </div>
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('kategori') }}">
+                    <a href="{{ route('kategori.index') }}">
                     </a>
                 </div>
 
@@ -21,7 +21,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kategori')" :active="request()->routeIs('kategori')">
+                    <x-nav-link :href="route('kategori.index')" :active="request()->routeIs('kategori')">
                         {{ __('Kategori') }}
                     </x-nav-link>
                 </div>
