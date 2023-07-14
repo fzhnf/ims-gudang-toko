@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
     Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
     Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
     Route::get('/kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
