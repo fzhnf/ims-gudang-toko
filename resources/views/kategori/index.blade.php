@@ -3,11 +3,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Daftar Kategori') }}                    
         </h2>
-        <div class="flex mt-5 w-[100%]">
-            @include('components.filter-hover')
-            @include('components.search-bar')
-        </div>
     </x-slot>
+
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        @include('components.kategori-tableview')
+    </div>
+
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
