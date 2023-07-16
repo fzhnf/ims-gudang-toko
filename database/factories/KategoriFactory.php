@@ -22,6 +22,7 @@ class KategoriFactory extends Factory
     {
         return [
             'nama_kategori' => $this->faker->word,
+            'pemasok' => $this->faker->word
         ];
     }
 }

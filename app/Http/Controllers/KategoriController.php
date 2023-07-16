@@ -34,18 +34,18 @@ class KategoriController extends Controller
     }
 
     public function store(Request $request) {
-        Kategori::create([
-            'nama_kategori' => $request->nama_kategori
-        ]);
-        return 'success';
+        Kategori::create($request->all());
+        $kategori = Kategori::all();
+        return view('kategori.index', compact('kategori'));
     }
 
     public function update(Request $request, $id) {
         $kategori = kategori::find($id);
         $kategori->update([
-            'nama_kategori' => $request->nama_kategori
+            'nama_kategori' => $request->nama_kategori,
+            'pemasok' => $request->pemasok
         ]);
-        return 'success';
+        return view('kategori.index', compact('kategori'));
     }
 
     public function destroy($id) {
