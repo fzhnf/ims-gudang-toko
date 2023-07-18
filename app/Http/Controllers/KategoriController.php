@@ -30,7 +30,10 @@ class KategoriController extends Controller
 
     public function show($id) {
         $kategori = Kategori::find($id);
-        return response()->json($kategori);
+        return view('kategori.edit', compact('kategori'))->with([
+            'nama_kategori' => $kategori->nama_kategori,
+            'pemasok' => $kategori->pemasok
+        ]);
     }
 
     public function store(Request $request) {
@@ -41,10 +44,7 @@ class KategoriController extends Controller
 
     public function update(Request $request, $id) {
         $kategori = kategori::find($id);
-        $kategori->update([
-            'nama_kategori' => $request->nama_kategori,
-            'pemasok' => $request->pemasok
-        ]);
+        $kategori->update($request->all());
         return view('kategori.index', compact('kategori'));
     }
 
