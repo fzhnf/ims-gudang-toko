@@ -2,19 +2,16 @@
 
 namespace Database\Seeders;
 
-
-use App\Models\Kategori;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class KategoriSeeder extends Seeder
 {
-    
-    protected $table = 'kategori';
-
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        Kategori::factory()
-            ->count(6)
-            ->create();
+        //
     }
 }

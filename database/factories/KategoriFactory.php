@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Kategori;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,14 +14,10 @@ class KategoriFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
-    protected $model = Kategori::class;
-
-    public function definition()
+    public function definition(): array
     {
         return [
-            'nama_kategori' => $this->faker->word,
-            'pemasok' => $this->faker->word
+            //
         ];
     }
 }

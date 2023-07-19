@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/kategori/add', function() {
+    return view('kategori.create');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,13 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
-    Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
-    Route::post('/kategori/create', [KategoriController::class, 'store'])->name('kategori.store');
-    Route::get('/kategori/{id}/edit', [KategoriController::class, 'show'])->name('kategori.show');
-    Route::put('/kategori/{id}/edit', [KategoriController::class, 'update'])->name('kategori.update');
-    Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+    Route::resource('/kategori', KategoriController::class);
 });
-
 
 require __DIR__.'/auth.php';

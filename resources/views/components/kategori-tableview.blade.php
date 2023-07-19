@@ -7,6 +7,9 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
             </button>
+            <button type="button" onclick="window.location='{{ url('kategori/add') }}'" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm ml-2 px-5 py-1.5 text-center mr-2 mb-2">
+                <i class="fa-solid fa-plus"></i>
+            </button>
             <!-- Dropdown menu -->
             <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
@@ -25,9 +28,7 @@
                 </ul>
             </div>
         </div>
-        <button data-modal-target="createModal" data-modal-toggle="createModal" class="block text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700" type="button">
-            Create
-        </button>
+        
         <label for="table-search" class="sr-only">Search</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -54,7 +55,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($kategori as $item )
+        @foreach ($kategori as $item)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-4 p-4">
                     {{$item->id}}
@@ -66,10 +67,16 @@
                     {{$item->pemasok}}
                 </th>
                 <td class="px-6 py-4 flex">
-                    <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer" type="button">Edit</button>
-                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 ml-1 cursor-pointer" type="button">
-                        Delete
+                    <button type="button" onclick="window.location='{{ url('kategori/'.$item->id) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center mr-1 mb-2">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </button>
+                    <form onsubmit="return deleteData('{{ $item->nama_kategori }}')" method="POST" action="{{ url('kategori/'.$item->id) }}" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center mr-2 mb-2">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>          
         @endforeach

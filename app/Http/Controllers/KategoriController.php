@@ -1,58 +1,74 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Kategori;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreKategoriRequest;
+use App\Http\Requests\UpdateKategoriRequest;
 
 
-// class Kategori extends Model
-// {
-//     use HasFactory;
-
-//     protected $table = 'kategori';
-//     protected $fillable = ['nama_kategori'];
 
 class KategoriController extends Controller
 {
-    // public function index()
-    // {
-    //     $kategori = Kategori::all();
-    //     return view('kategori.index', compact('kategori'));
-    // }
-    public function index(Request $request) {
-        if ($request->has('cari')) {
-            $kategori = Kategori::where('nama_kategori', 'LIKE', '%'.$request->cari.'%')->get();
-        } else {
-            $kategori = Kategori::all();
-        }
-        return view('kategori.index', compact('kategori'));
-    }
-
-    public function show($id) {
-        $kategori = Kategori::find($id);
-        return view('kategori.edit', compact('kategori'))->with([
-            'nama_kategori' => $kategori->nama_kategori,
-            'pemasok' => $kategori->pemasok
+    /**
+     * Display a listing of the resource.
+     */
+    public function index() 
+    {
+        return view('kategori.index')->with([
+            'kategori' => Kategori::all()
         ]);
     }
 
-    public function store(Request $request) {
-        Kategori::create($request->all());
-        $kategori = Kategori::all();
-        return view('kategori.index', compact('kategori'));
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreKategoriRequest $request)
+    {
+        $validate = $request->validated();
+        
+        $kategori = new Kategori;
+        $kategori->nama_kategori = $request->txtkategori;
+        $kategori->pemasok = $request->txtpemasok;
+        $kategori->save();
+
+        return redirect('kategori')->with('msg','Add kategori succesfully');
+
     }
 
-    public function update(Request $request, $id) {
-        $kategori = kategori::find($id);
-        $kategori->update($request->all());
-        return view('kategori.index', compact('kategori'));
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $data = Kategori::find($id);
+        return view('kategori.edit')->with([
+            'txtid' => $id,
+            'txtkategori' => $data->nama_kategori,
+            'txtpemasok' => $data->pemasok
+        ]);
     }
 
-    public function destroy($id) {
-        Kategori::destroy($id);
-        return 'success';
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateKategoriRequest $request, $id)
+    {
+        $data = Kategori::find($id);
+        $data->nama_kategori = $request->txtkategori;
+        $data->pemasok = $request->txtpemasok;
+        $data->save();
+
+        return redirect('kategori')->with('msg','Edit kategori succesfully');
     }
 
-
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $data = Kategori::find($id);
+        $data->delete();
+        return redirect('kategori')->with('msg','Kategori succesfully updated');
+    }
 }
