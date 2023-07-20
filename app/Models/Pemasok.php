@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pemasok extends Model
 {
     use HasFactory;
+    protected $table = 'pemasok';
+    protected $primaryKey = 'id';
+    protected $incrementing = false;
+    public $timestamps = true;
 }

@@ -17,14 +17,6 @@ class PemasokController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StorePemasokRequest $request)
@@ -35,15 +27,7 @@ class PemasokController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pemasok $pemasok)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pemasok $pemasok)
+    public function show($id)
     {
         //
     }
@@ -51,7 +35,7 @@ class PemasokController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePemasokRequest $request, Pemasok $pemasok)
+    public function update(UpdatePemasokRequest $request, $id)
     {
         //
     }
@@ -59,7 +43,7 @@ class PemasokController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pemasok $pemasok)
+    public function destroy($id)
     {
         //
     }
