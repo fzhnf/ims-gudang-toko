@@ -32,7 +32,7 @@ class KategoriController extends Controller
         $kategori->pemasok = $request->txtpemasok;
         $kategori->save();
 
-        return redirect('kategori')->with('msg','Add kategori succesfully');
+        return redirect('kategori')->with('msg','Kategori succesfully added');
 
     }
 
@@ -59,7 +59,7 @@ class KategoriController extends Controller
         $data->pemasok = $request->txtpemasok;
         $data->save();
 
-        return redirect('kategori')->with('msg','Edit kategori succesfully');
+        return redirect('kategori')->with('msg','Kategori succesfully updated');
     }
 
     /**
@@ -69,6 +69,6 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->delete();
-        return redirect('kategori')->with('msg','Kategori succesfully updated');
+        return redirect('kategori')->with('msg','Kategori succesfully deleted');
     }
 }
