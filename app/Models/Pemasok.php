@@ -10,6 +10,10 @@ class Pemasok extends Model
     use HasFactory;
     protected $table = 'pemasok';
     protected $primaryKey = 'id';
-    protected $incrementing = false;
+    public $incrementing = false;
     public $timestamps = true;
+    protected $fillable = [
+        'nama_pemasok',
+        'domisili'
+    ];
 }
