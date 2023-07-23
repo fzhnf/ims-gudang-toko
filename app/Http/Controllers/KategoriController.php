@@ -28,10 +28,9 @@ class KategoriController extends Controller
     {
         $validate = $request->validated();
         
-        $pemasok = Pemasok::find($request->txtpemasok);
+        // $pemasok = Pemasok::find($request->txtnamapemasok); Fitur untuk auto bikin relasi
         $kategori = new Kategori;
         $kategori->nama_kategori = $request->txtkategori;
-        $kategori->pemasok = $request->nama_pemasok;
         $kategori->save();
 
         return redirect('kategori')->with('msg','Kategori succesfully added');
@@ -47,7 +46,7 @@ class KategoriController extends Controller
         return view('kategori.edit')->with([
             'txtid' => $id,
             'txtkategori' => $data->nama_kategori,
-            'txtpemasok' => $data->pemasok
+            'txtnamapemasok' => $data->pemasok
         ]);
     }
 
@@ -58,7 +57,7 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->nama_kategori = $request->txtkategori;
-        $data->pemasok = $request->txtpemasok;
+        $data->pemasok = $request->txtnamapemasok;
         $data->save();
 
         return redirect('kategori')->with('msg','Kategori succesfully updated');

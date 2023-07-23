@@ -22,8 +22,8 @@ class StorePemasokRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'txtnamapemasok' => 'required',
-            'txtdomisili' => 'required'
+            'txtnamapemasok' => 'required'
+            'txtdomisili' => 'required' ga perlu
         ];
     }
 }

@@ -18,7 +18,7 @@ class PemasokFactory extends Factory
     {
         return [
             'nama_pemasok' => fake()->name(),
-            'domisili' => fake()->name(),
+            'domisili' => fake()->city(),
         ];
     }
 }

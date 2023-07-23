@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
 
-    public function pemasok()
-    {
-        return $this->belongsTo(Pemasok::class, 'nama_kategori', 'id');
-    }
+    // public function pemasok()
+    // {
+    //     return $this->belongsTo(Pemasok::class, 'nama_kategori', 'id');
+    // }
 
     use HasFactory;
 
@@ -19,6 +19,6 @@ class Kategori extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = true;
-    protected $fillable = ['nama_kategori', 'domisili'];
+    protected $fillable = ['nama_kategori'];
 
 }
