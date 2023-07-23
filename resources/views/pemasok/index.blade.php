@@ -21,7 +21,7 @@
                 </button>
             </div>
             @endif
-            @include('components.kategori-tableview')
+            @include('components.pemasok-tableview')
         </div>
         <script>
             function deleteData(name) {

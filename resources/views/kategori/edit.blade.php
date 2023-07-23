@@ -8,10 +8,6 @@
         @csrf
         @method('PUT')
             <div class="mb-4">
-                <label for="txtid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Id</label>
-                <input type="text" id="txtid" name="txtid" value="{{ $txtid }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-            <div class="mb-4">
                 <label for="txtkategori" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
                 <input type="text" id="txtkategori" name="txtkategori" value="{{ $txtkategori }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
