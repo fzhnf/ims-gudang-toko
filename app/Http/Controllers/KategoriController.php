@@ -46,7 +46,7 @@ class KategoriController extends Controller
         return view('kategori.edit')->with([
             'txtid' => $id,
             'txtkategori' => $data->nama_kategori,
-            'txtnamapemasok' => $data->pemasok
+            // 'txtnamapemasok' => $data->pemasok
         ]);
     }
 
