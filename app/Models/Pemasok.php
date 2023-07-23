@@ -12,8 +12,5 @@ class Pemasok extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     public $timestamps = true;
-    protected $fillable = [
-        'nama_pemasok',
-        'domisili'
-    ];
+    
 }

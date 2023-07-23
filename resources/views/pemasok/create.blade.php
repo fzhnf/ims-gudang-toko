@@ -4,11 +4,11 @@
             <i class="fa-solid fa-arrow-left pr-1"></i>Kembali
         </button>
         <h1 class="text-2xl font-semibold mb-2 text-green-600/100 dark:text-blue-500/100">Create Pemasok</h1>
-        <form method="POST" action="{{ url('kategori') }}">
+        <form method="POST" action="{{ url('pemasok') }}">
             @csrf
             <div class="mb-4">
-                <label for="txtpemasok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemasok</label>
-                <input type="text" id="txtpemasok" name="txtpemasok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <label for="txtnamapemasok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemasok</label>
+                <input type="text" id="txtnamapemasok" name="txtnamapemasok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="mb-6">
                 <label for="txtdomisili" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Domisili</label>

@@ -28,7 +28,7 @@ class KategoriController extends Controller
         $validate = $request->validated();
         
         $kategori = new Kategori;
-        $kategori->nama_kategori = $request->txtkategori;
+        $kategori->nama_kategori = $request->txtnamapemasok;
         $kategori->pemasok = $request->txtpemasok;
         $kategori->save();
 
