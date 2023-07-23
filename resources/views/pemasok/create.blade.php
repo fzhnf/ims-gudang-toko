@@ -4,7 +4,7 @@
           <i class="fa-solid fa-arrow-left pr-1"></i>Kembali
         </button>
         <h1 class="text-2xl font-semibold mb-2 text-green-600/100 dark:text-blue-500/100">Create Pemasok</h1>
-        <form method="POST" action="{{ url('kategori') }}"> 
+        <form method="POST" action="{{ url('pemasok') }}"> 
         @csrf     
             <div class="mb-4">
               <label for="txtpemasok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pemasok</label>
