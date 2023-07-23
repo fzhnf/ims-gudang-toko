@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pemasok extends Model
 {
+    public function kategori()
+    {
+      return $this->hasMany(Kategori::class, 'nama_pemasok', 'id');
+    }
     use HasFactory;
     protected $table = 'pemasok';
     protected $primaryKey = 'id';

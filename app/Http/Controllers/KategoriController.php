@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Pemasok;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
-
 
 
 class KategoriController extends Controller
@@ -13,6 +13,7 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index() 
     {
         return view('kategori.index')->with([
@@ -27,9 +28,10 @@ class KategoriController extends Controller
     {
         $validate = $request->validated();
         
+        $pemasok = Pemasok::find($request->txtpemasok);
         $kategori = new Kategori;
-        $kategori->nama_kategori = $request->txtnamapemasok;
-        $kategori->pemasok = $request->txtpemasok;
+        $kategori->nama_kategori = $request->txtkategori;
+        $kategori->pemasok = $request->nama_pemasok;
         $kategori->save();
 
         return redirect('kategori')->with('msg','Kategori succesfully added');
