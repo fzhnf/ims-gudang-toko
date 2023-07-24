@@ -23,7 +23,7 @@ class StorePemasokRequest extends FormRequest
     {
         return [
             'txtnamapemasok' => 'required'
-            'txtdomisili' => 'required' ga perlu
+            'txtdomisili' => 'required'
         ];
     }
 }

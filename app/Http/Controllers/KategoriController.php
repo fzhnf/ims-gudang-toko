@@ -8,6 +8,7 @@ use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
 
+
 class KategoriController extends Controller
 {
     /**
@@ -34,7 +35,6 @@ class KategoriController extends Controller
         $kategori->save();
 
         return redirect('kategori')->with('msg','Kategori succesfully added');
-
     }
 
     /**

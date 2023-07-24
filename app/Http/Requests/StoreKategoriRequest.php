@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class StoreKategoriRequest extends FormRequest
 {
     /**
@@ -27,5 +26,4 @@ class StoreKategoriRequest extends FormRequest
             // 'txtpemasok' => 'required' ga perlu
         ];
     }
-
 }

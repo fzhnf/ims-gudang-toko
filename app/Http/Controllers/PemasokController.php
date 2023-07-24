@@ -28,7 +28,7 @@ class PemasokController extends Controller
       $validate = $request->validated();
 
       $pemasok = new Pemasok;
-      $pemasok->nama_pemasok = $request->txtnamapemasok;
+      $pemasok->nama_pemasok = $request->txtpemasok;
       $pemasok->domisili = $request->txtdomisili;
       $pemasok->save();
 
@@ -42,9 +42,9 @@ class PemasokController extends Controller
     {
       $data = Pemasok::find($id);
       return view('pemasok.edit')->with([
-        'txtid' => $id,
-        'txtnamapemasok' => $data->nama_pemasok,
-        'txtdomisili' => $data->domisili
+          'txtid' => $id,
+          'txtpemasok' => $data->nama_pemasok,
+          'txtdomisili' => $data->domisili
       ]);
     }
 
@@ -54,7 +54,7 @@ class PemasokController extends Controller
     public function update(UpdatePemasokRequest $request, $id)
     {
       $data = Pemasok::find($id);
-      $data->nama_pemasok = $request->txtnamapemasok;
+      $data->nama_pemasok = $request->txtpemasok;
       $data->domisili = $request->txtdomisili;
       $data->save();
 
@@ -68,7 +68,6 @@ class PemasokController extends Controller
     {
       $data = Pemasok::find($id);
       $data->delete();
-
       return redirect('pemasok')->with('msg','Pemasok succesfully deleted');
     }
 }
