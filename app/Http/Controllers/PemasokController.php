@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemasok;
-use App\Model\Kategori;
 use App\Http\Requests\StorePemasokRequest;
 use App\Http\Requests\UpdatePemasokRequest;
 
@@ -15,9 +14,11 @@ class PemasokController extends Controller
 
     public function index()
     {
-      return view('pemasok.index')->with([
-        'pemasok' => Pemasok::all()
-      ]);
+        return view('pemasok.index')->with(
+            [
+            'pemasok' => Pemasok::all()
+            ]
+        );
     }
 
     /**
@@ -25,14 +26,14 @@ class PemasokController extends Controller
      */
     public function store(StorePemasokRequest $request)
     {
-      $validate = $request->validated();
+        $validate = $request->validated();
 
-      $pemasok = new Pemasok;
-      $pemasok->nama_pemasok = $request->txtpemasok;
-      $pemasok->domisili = $request->txtdomisili;
-      $pemasok->save();
+        $pemasok = new Pemasok;
+        $pemasok->nama_pemasok = $request->txtnamapemasok;
+        $pemasok->domisili = $request->txtdomisili;
+        $pemasok->save();
 
-      return redirect('pemasok')->with('msg','Pemasok succesfully added');
+        return redirect('pemasok')->with('msg', 'Pemasok succesfully added');
     }
 
     /**
@@ -40,12 +41,14 @@ class PemasokController extends Controller
      */
     public function show($id)
     {
-      $data = Pemasok::find($id);
-      return view('pemasok.edit')->with([
-          'txtid' => $id,
-          'txtpemasok' => $data->nama_pemasok,
-          'txtdomisili' => $data->domisili
-      ]);
+        $data = Pemasok::find($id);
+        return view('pemasok.edit')->with(
+            [
+            'txtid' => $id,
+            'txtpemasok' => $data->nama_pemasok,
+            'txtdomisili' => $data->domisili
+            ]
+        );
     }
 
     /**
@@ -53,12 +56,12 @@ class PemasokController extends Controller
      */
     public function update(UpdatePemasokRequest $request, $id)
     {
-      $data = Pemasok::find($id);
-      $data->nama_pemasok = $request->txtpemasok;
-      $data->domisili = $request->txtdomisili;
-      $data->save();
+        $data = Pemasok::find($id);
+        $data->nama_pemasok = $request->txtpemasok;
+        $data->domisili = $request->txtdomisili;
+        $data->save();
 
-      return redirect('pemasok')->with('msg','Pemasok succesfully updated');
+        return redirect('pemasok')->with('msg', 'Pemasok succesfully updated');
     }
 
     /**
@@ -66,8 +69,8 @@ class PemasokController extends Controller
      */
     public function destroy($id)
     {
-      $data = Pemasok::find($id);
-      $data->delete();
-      return redirect('pemasok')->with('msg','Pemasok succesfully deleted');
+        $data = Pemasok::find($id);
+        $data->delete();
+        return redirect('pemasok')->with('msg', 'Pemasok succesfully deleted');
     }
 }
