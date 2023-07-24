@@ -12,8 +12,8 @@
                 <input type="text" id="txtid" name="txtid" value="{{ $txtid }}" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div> --}}
             <div class="mb-4">
-                <label for="txtnamapemasok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemasok</label>
-                <input type="text" id="txtnamapemasok" name="txtnamapemasok" value="{{ $txtnamapemasok }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <label for="txtpemasok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemasok</label>
+                <input type="text" id="txtpemasok" name="txtpemasok" value="{{ $txtpemasok }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="mb-6">
                 <label for="txtdomisili" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Domisili</label>
