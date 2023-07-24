@@ -17,9 +17,11 @@ class KategoriController extends Controller
 
     public function index() 
     {
-        return view('kategori.index')->with([
+        return view('kategori.index')->with(
+            [
             'kategori' => Kategori::all()
-        ]);
+            ]
+        );
     }
 
     /**
@@ -34,7 +36,7 @@ class KategoriController extends Controller
         $kategori->nama_kategori = $request->txtkategori;
         $kategori->save();
 
-        return redirect('kategori')->with('msg','Kategori succesfully added');
+        return redirect('kategori')->with('msg', 'Kategori succesfully added');
     }
 
     /**
@@ -43,11 +45,13 @@ class KategoriController extends Controller
     public function show($id)
     {
         $data = Kategori::find($id);
-        return view('kategori.edit')->with([
+        return view('kategori.edit')->with(
+            [
             'txtid' => $id,
             'txtkategori' => $data->nama_kategori,
             // 'txtnamapemasok' => $data->pemasok
-        ]);
+            ]
+        );
     }
 
     /**
@@ -57,10 +61,9 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->nama_kategori = $request->txtkategori;
-        $data->pemasok = $request->txtnamapemasok;
         $data->save();
 
-        return redirect('kategori')->with('msg','Kategori succesfully updated');
+        return redirect('kategori')->with('msg', 'Kategori succesfully updated');
     }
 
     /**
@@ -70,6 +73,6 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->delete();
-        return redirect('kategori')->with('msg','Kategori succesfully deleted');
+        return redirect('kategori')->with('msg', 'Kategori succesfully deleted');
     }
 }
