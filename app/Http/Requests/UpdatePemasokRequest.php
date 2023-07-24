@@ -22,7 +22,7 @@ class UpdatePemasokRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'txtpemasok' => 'required',
+            'txtnamapemasok' => 'required',
             'txtdomisili' => 'required'
         ];
     }

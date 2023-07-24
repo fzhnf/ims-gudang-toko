@@ -19,12 +19,12 @@
                             <label for="filter-radio-example-1" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Kategori</label>
                         </div>
                     </li>
-                    <li>
+{{--                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                             <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="filter-radio-example-2" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Pemasok</label>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -46,10 +46,10 @@
                 <th scope="col" class="px-6 py-3">
                     Kategori
                 </th>
-                <th scope="col" class="px-6 py-3">
+{{--                 <th scope="col" class="px-6 py-3">
                     Pemasok
                 </th>
-                <th scope="col" class="px-6 py-3">
+ --}}                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -63,9 +63,9 @@
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$item->nama_kategori}}
                 </th>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+{{--                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$item->pemasok}}
-                </th>
+                </th> --}}
                 <td class="px-6 py-4 flex">
                     <button type="button" onclick="window.location='{{ url('kategori/'.$item->id) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-1.5 text-center mr-1 mb-2">
                         <i class="fa-solid fa-pen-to-square"></i>

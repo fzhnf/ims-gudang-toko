@@ -24,6 +24,10 @@ Route::get('/kategori/add', function() {
     return view('kategori.create');
 });
 
+Route::get('/pemasok/add', function() {
+    return view('pemasok.create');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
