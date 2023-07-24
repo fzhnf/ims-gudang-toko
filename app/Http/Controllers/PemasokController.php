@@ -29,7 +29,7 @@ class PemasokController extends Controller
         $validate = $request->validated();
 
         $pemasok = new Pemasok;
-        $pemasok->nama_pemasok = $request->txtnamapemasok;
+        $pemasok->nama_pemasok = $request->txtpemasok;
         $pemasok->domisili = $request->txtdomisili;
         $pemasok->save();
 
