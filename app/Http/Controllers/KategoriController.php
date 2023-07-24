@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Pemasok;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
@@ -13,11 +14,14 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index() 
     {
-        return view('kategori.index')->with([
+        return view('kategori.index')->with(
+            [
             'kategori' => Kategori::all()
-        ]);
+            ]
+        );
     }
 
     /**
@@ -27,13 +31,12 @@ class KategoriController extends Controller
     {
         $validate = $request->validated();
         
+        // $pemasok = Pemasok::find($request->txtnamapemasok); Fitur untuk auto bikin relasi
         $kategori = new Kategori;
         $kategori->nama_kategori = $request->txtkategori;
-        $kategori->pemasok = $request->txtpemasok;
         $kategori->save();
 
-        return redirect('kategori')->with('msg','Add kategori succesfully');
-
+        return redirect('kategori')->with('msg', 'Kategori succesfully added');
     }
 
     /**
@@ -42,11 +45,13 @@ class KategoriController extends Controller
     public function show($id)
     {
         $data = Kategori::find($id);
-        return view('kategori.edit')->with([
+        return view('kategori.edit')->with(
+            [
             'txtid' => $id,
             'txtkategori' => $data->nama_kategori,
-            'txtpemasok' => $data->pemasok
-        ]);
+            // 'txtnamapemasok' => $data->pemasok
+            ]
+        );
     }
 
     /**
@@ -56,10 +61,9 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->nama_kategori = $request->txtkategori;
-        $data->pemasok = $request->txtpemasok;
         $data->save();
 
-        return redirect('kategori')->with('msg','Edit kategori succesfully');
+        return redirect('kategori')->with('msg', 'Kategori succesfully updated');
     }
 
     /**
@@ -69,6 +73,6 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         $data->delete();
-        return redirect('kategori')->with('msg','Kategori succesfully updated');
+        return redirect('kategori')->with('msg', 'Kategori succesfully deleted');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class StoreKategoriRequest extends FormRequest
 {
     /**
@@ -23,9 +22,8 @@ class StoreKategoriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'txtkategori' => 'required',
-            'txtpemasok' => 'required'
+            'txtkategori' => 'required'
+            // 'txtpemasok' => 'required' ga perlu
         ];
     }
-
 }

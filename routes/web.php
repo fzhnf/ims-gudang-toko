@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ Route::get('/kategori/add', function() {
     return view('kategori.create');
 });
 
+Route::get('/pemasok/add', function() {
+    return view('pemasok.create');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,6 +40,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('/kategori', KategoriController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/pemasok', PemasokController::class);
 });
 
 require __DIR__.'/auth.php';

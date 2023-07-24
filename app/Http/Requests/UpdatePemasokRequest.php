@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateKategoriRequest extends FormRequest
+class UpdatePemasokRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class UpdateKategoriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'txtkategori' => 'required'
-            // 'txtpemasok' => 'required' ga perlu
+            'txtnamapemasok' => 'required',
+            'txtdomisili' => 'required'
         ];
     }
 }
