@@ -11,7 +11,7 @@ class Kategori extends Model
     // public function pemasok()
     // {
     //     return $this->belongsTo(Pemasok::class, 'nama_kategori', 'id');
-    // }
+    // } entah ini masih kepake atau ga. blm ditest
 
     use HasFactory;
     protected $table = 'kategori';
@@ -19,4 +19,8 @@ class Kategori extends Model
     public $incrementing = true;
     public $timestamps = true;
     protected $fillable = ['nama_kategori'];
+
+    public function produk(){
+        return $this->hasMany(Produk::class, 'kategori_id');
+    }
 }

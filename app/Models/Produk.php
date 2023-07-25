@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     use HasFactory;
+    protected $table = 'produk';
+    protected $primaryKey = 'id_produk';
+    public $incrementing = false;
+    
+    public function kategori(){
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
+
+    public function pemasok(){
+        return $this->belongsTo(Pemasok::class, 'pemasok_id');
+    }
+
+    public $timestamps = true;
 }
