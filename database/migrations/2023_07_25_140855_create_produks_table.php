@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedInteger('pemasok_id');
             $table->string('nama_produk', 260);
             $table->string('kategori', 260);
-            $table->integer('quantity'->nullable());
-            $table->float('harga_per_pcs'->nullable());
+            $table->integer('quantity')->nullable();
+            $table->float('harga_per_pcs')->nullable();
             $table->string('nama_pemasok');
             $table->timestamps();
 
