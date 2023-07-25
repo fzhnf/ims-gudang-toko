@@ -17,7 +17,9 @@ class ProdukFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_produk' => fake()->words(2, true),
+            'quantity' => fake()->randomNumber(2),
+            'harga_per_pcs' => fake()->numberBetween($min = 1500, $max = 6000),
         ];
     }
 }
