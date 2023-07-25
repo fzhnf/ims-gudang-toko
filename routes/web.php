@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
@@ -44,6 +45,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('/pemasok', PemasokController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/produk', ProdukController::class);
 });
 
 require __DIR__.'/auth.php';
