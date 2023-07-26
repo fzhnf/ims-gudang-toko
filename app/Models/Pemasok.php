@@ -28,6 +28,13 @@ class Pemasok extends Model
 
     public function setDomisiliAttribute($value){
         $this->attributes['domisili'] = ucwords($value);
+    }
+        
+    protected static function boot(){
+        parent::boot();
+
+        static::addGlobalScope('orderById', function ($query) {
+            $query->orderBy('id', 'asc');
+        });
     }    
-    
 }

@@ -23,8 +23,16 @@ class Kategori extends Model
     public function produk(){
         return $this->hasMany(Produk::class, 'kategori_id');
     }
-
+    
     public function setNamaKategoriAttribute($value){
         $this->attributes['nama_kategori'] = ucwords($value);
+    }
+
+    protected static function boot(){
+        parent::boot();
+
+        static::addGlobalScope('orderById', function ($query) {
+            $query->orderBy('id', 'asc');
+        });
     }
 }
