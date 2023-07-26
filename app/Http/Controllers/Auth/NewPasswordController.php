@@ -4,27 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
-<<<<<<< HEAD
-use Illuminate\Http\JsonResponse;
-=======
 use Illuminate\Http\RedirectResponse;
->>>>>>> pemasok
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
-<<<<<<< HEAD
-use Illuminate\Validation\ValidationException;
-=======
 use Illuminate\View\View;
->>>>>>> pemasok
 
 class NewPasswordController extends Controller
 {
     /**
-<<<<<<< HEAD
-=======
      * Display the password reset view.
      */
     public function create(Request $request): View
@@ -33,16 +23,11 @@ class NewPasswordController extends Controller
     }
 
     /**
->>>>>>> pemasok
      * Handle an incoming new password request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-<<<<<<< HEAD
-    public function store(Request $request): JsonResponse
-=======
     public function store(Request $request): RedirectResponse
->>>>>>> pemasok
     {
         $request->validate([
             'token' => ['required'],
@@ -65,15 +50,6 @@ class NewPasswordController extends Controller
             }
         );
 
-<<<<<<< HEAD
-        if ($status != Password::PASSWORD_RESET) {
-            throw ValidationException::withMessages([
-                'email' => [__($status)],
-            ]);
-        }
-
-        return response()->json(['status' => __($status)]);
-=======
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
@@ -81,6 +57,5 @@ class NewPasswordController extends Controller
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
->>>>>>> pemasok
     }
 }
