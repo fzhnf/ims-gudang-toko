@@ -21,5 +21,13 @@ class Pemasok extends Model
     public function produk(){
         return $this->hasMany(Produk::class, 'pemasok_id');
     }
+
+    public function setNamaPemasokAttribute($value){
+        $this->attributes['nama_pemasok'] = ucwords($value);
+    }
+
+    public function setDomisiliAttribute($value){
+        $this->attributes['domisili'] = ucwords($value);
+    }    
     
 }
