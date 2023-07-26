@@ -12,6 +12,8 @@ class PasswordResetTest extends TestCase
 {
     use RefreshDatabase;
 
+<<<<<<< HEAD
+=======
     public function test_reset_password_link_screen_can_be_rendered(): void
     {
         $response = $this->get('/forgot-password');
@@ -19,6 +21,7 @@ class PasswordResetTest extends TestCase
         $response->assertStatus(200);
     }
 
+>>>>>>> pemasok
     public function test_reset_password_link_can_be_requested(): void
     {
         Notification::fake();
@@ -30,6 +33,8 @@ class PasswordResetTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
+<<<<<<< HEAD
+=======
     public function test_reset_password_screen_can_be_rendered(): void
     {
         Notification::fake();
@@ -47,6 +52,7 @@ class PasswordResetTest extends TestCase
         });
     }
 
+>>>>>>> pemasok
     public function test_password_can_be_reset_with_valid_token(): void
     {
         Notification::fake();
@@ -55,7 +61,11 @@ class PasswordResetTest extends TestCase
 
         $this->post('/forgot-password', ['email' => $user->email]);
 
+<<<<<<< HEAD
+        Notification::assertSentTo($user, ResetPassword::class, function (object $notification) use ($user) {
+=======
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
+>>>>>>> pemasok
             $response = $this->post('/reset-password', [
                 'token' => $notification->token,
                 'email' => $user->email,
