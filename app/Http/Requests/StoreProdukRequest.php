@@ -4,7 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreKategoriRequest extends FormRequest
+<<<<<<<< HEAD:app/Http/Requests/StorePemasokRequest.php
+class StorePemasokRequest extends FormRequest
+========
+class StoreProdukRequest extends FormRequest
+>>>>>>>> dev/produk/be/han:app/Http/Requests/StoreProdukRequest.php
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +26,8 @@ class StoreKategoriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'txtkategori' => 'required'
-            
+            'txtpemasok' => 'required',
+            'txtdomisili' => 'required'
         ];
     }
 }
