@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Produk;
 use Illuminate\Database\Seeder;
 
 class ProdukSeeder extends Seeder {
@@ -15,10 +16,20 @@ class ProdukSeeder extends Seeder {
 
 		\App\Models\Produk::factory(20)->create();
 		// There is no need to set the nama_kategori attribute, you can access it directly from the relationship
-		foreach ($produk as $item) {
-			$nama_kategori = $item->kategori->nama_kategori;
-			echo "Nama Kategori: " . $nama_kategori . PHP_EOL;
+		$produksWithKategori = Produk::with('kategori')->get();
+
+		// Menampilkan informasi produk beserta informasi kategori
+		foreach ($produksWithKategori as $produk) {
+			$nama_produk = $produk->nama_produk;
+			$quantity = $produk->quantity;
+			$harga_per_pcs = $produk->harga_per_pcs;
+			$nama_kategori = $produk->kategori->nama_kategori;
+			echo "Nama Produk: " . $nama_produk . ", ";
+			echo "Quantity: " . $quantity . ", ";
+			echo "Harga per pcs: " . $harga_per_pcs . ", ";
+			echo "Nama Kategori: " . $nama_kategori . "\n";
 		}
+
 		// [
 		// 'kategori_id' => function () use ($kategoriIds) {
 		// 	return $this->faker->randomElement($kategoriIds);
