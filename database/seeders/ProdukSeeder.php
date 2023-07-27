@@ -16,6 +16,7 @@ class ProdukSeeder extends Seeder {
 		$produksWithKategoriAndPemasok = Produk::with('kategori', 'pemasok')->get();
 
 		// Menampilkan informasi produk beserta informasi kategori
+		// Pindah ke controller iz
 		foreach ($produksWithKategoriAndPemasok as $produk) {
 			$nama_produk = $produk->nama_produk;
 			$quantity = $produk->quantity;
