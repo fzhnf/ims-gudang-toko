@@ -13,20 +13,22 @@ class ProdukSeeder extends Seeder {
 
 		\App\Models\Produk::factory(20)->create();
 		// There is no need to set the nama_kategori attribute, you can access it directly from the relationship
-		$produksWithKategori = Produk::with('kategori')->get();
+		$produksWithKategoriAndPemasok = Produk::with('kategori', 'pemasok')->get();
 
 		// Menampilkan informasi produk beserta informasi kategori
-		foreach ($produksWithKategori as $produk) {
+		foreach ($produksWithKategoriAndPemasok as $produk) {
 			$nama_produk = $produk->nama_produk;
 			$quantity = $produk->quantity;
 			$harga_per_pcs = $produk->harga_per_pcs;
 			$nama_kategori = $produk->kategori->nama_kategori;
+			$nama_pemasok = $produk->pemasok->nama_pemasok;
+
 			echo "Nama Produk: " . $nama_produk . ", ";
 			echo "Quantity: " . $quantity . ", ";
 			echo "Harga per pcs: " . $harga_per_pcs . ", ";
-			echo "Nama Kategori: " . $nama_kategori . "\n";
+			echo "Nama Kategori: " . $nama_kategori . ", ";
+			echo "Nama Pemasok: " . $nama_pemasok . "\n ";
 		}
 
-		// Bikin yang untuk pemasok, kalo udah ditest dulu baru dipindah ke controller barisnya.
 	}
 }
