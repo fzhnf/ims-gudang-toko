@@ -10,7 +10,7 @@ class Produk extends Model {
 	protected $table = 'produks';
 	protected $primaryKey = 'id_produk';
 	public $incrementing = false;
-	public $fillable = ['nama_produk', 'quantity', 'harga_per_pcs'];
+	public $fillable = ['nama_produk', 'quantity', 'harga_per_pcs', 'kategori_id', 'pemasok_id'];
 
 	public function kategori() {
 		return $this->belongsTo(Kategori::class, 'kategori_id');

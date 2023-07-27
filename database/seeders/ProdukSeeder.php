@@ -14,6 +14,11 @@ class ProdukSeeder extends Seeder {
 		// $pemasokIds = Pemasok::pluck('id_pemasok')->toArray();
 
 		\App\Models\Produk::factory(20)->create();
+		// There is no need to set the nama_kategori attribute, you can access it directly from the relationship
+		foreach ($produk as $item) {
+			$nama_kategori = $item->kategori->nama_kategori;
+			echo "Nama Kategori: " . $nama_kategori . PHP_EOL;
+		}
 		// [
 		// 'kategori_id' => function () use ($kategoriIds) {
 		// 	return $this->faker->randomElement($kategoriIds);
