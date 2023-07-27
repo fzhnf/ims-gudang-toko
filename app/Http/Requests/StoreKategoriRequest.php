@@ -23,7 +23,7 @@ class StoreKategoriRequest extends FormRequest
     {
         return [
             'txtkategori' => 'required'
-            // 'txtpemasok' => 'required' ga perlu
+            
         ];
     }
 }

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produk', function (Blueprint $table) {
+        Schema::create('produks', function (Blueprint $table) {
             $table->increments('id_produk');
             $table->unsignedInteger('kategori_id');
             $table->unsignedInteger('pemasok_id');
             $table->string('nama_produk', 260);
-            $table->string('nama_kategori', 260);
+            $table->string('kategori', 260);
             $table->integer('quantity')->nullable();
             $table->float('harga_per_pcs')->nullable();
             $table->string('nama_pemasok');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produk');
+        Schema::dropIfExists('produks');
     }
 };
