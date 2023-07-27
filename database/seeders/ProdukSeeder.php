@@ -11,9 +11,6 @@ class ProdukSeeder extends Seeder {
 	 */
 	public function run(): void {
 
-		// $kategoriIds = Kategori::pluck('id_kategori')->toArray();
-		// $pemasokIds = Pemasok::pluck('id_pemasok')->toArray();
-
 		\App\Models\Produk::factory(20)->create();
 		// There is no need to set the nama_kategori attribute, you can access it directly from the relationship
 		$produksWithKategori = Produk::with('kategori')->get();
@@ -30,12 +27,6 @@ class ProdukSeeder extends Seeder {
 			echo "Nama Kategori: " . $nama_kategori . "\n";
 		}
 
-		// [
-		// 'kategori_id' => function () use ($kategoriIds) {
-		// 	return $this->faker->randomElement($kategoriIds);
-		// },
-		// 'pemasok_id' => function () use ($pemasokIds) {
-		// 	return $this->faker->randomElement($pemasokIds);
-		// }]);
+		// Bikin yang untuk pemasok, kalo udah ditest dulu baru dipindah ke controller barisnya.
 	}
 }
