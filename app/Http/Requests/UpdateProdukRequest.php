@@ -22,7 +22,11 @@ class UpdateProdukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+        'txtnamaproduk' => 'required',
+        'txtharga' => 'required',
+        'txtstok' => 'required',
+        'txtpemasok' => 'required',
+        'txtkategori' => 'required',
         ];
     }
 }
