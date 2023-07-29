@@ -14,9 +14,10 @@ class PemasokController extends Controller
 
     public function index()
     {
+        $dataPemasok = Pemasok::paginate(10);
         return view('pemasok.index')->with(
             [
-            'pemasok' => Pemasok::all()
+            'pemasok' => $dataPemasok
             ]
         );
     }
@@ -39,12 +40,12 @@ class PemasokController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id_pemasok)
     {
-        $data = Pemasok::find($id);
+        $data = Pemasok::find($id_pemasok);
         return view('pemasok.edit')->with(
             [
-            'txtid' => $id,
+            'txtid' => $id_pemasok,
             'txtpemasok' => $data->nama_pemasok,
             'txtdomisili' => $data->domisili
             ]
@@ -54,9 +55,9 @@ class PemasokController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePemasokRequest $request, $id)
+    public function update(UpdatePemasokRequest $request, $id_pemasok)
     {
-        $data = Pemasok::find($id);
+        $data = Pemasok::find($id_pemasok);
         $data->nama_pemasok = $request->txtpemasok;
         $data->domisili = $request->txtdomisili;
         $data->save();
@@ -67,9 +68,9 @@ class PemasokController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_pemasok)
     {
-        $data = Pemasok::find($id);
+        $data = Pemasok::find($id_pemasok);
         $data->delete();
         return redirect('pemasok')->with('msg', 'Pemasok succesfully deleted');
     }

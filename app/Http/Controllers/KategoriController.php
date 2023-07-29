@@ -16,9 +16,10 @@ class KategoriController extends Controller
 
     public function index() 
     {
+        $dataKategori = Kategori::paginate(10);
         return view('kategori.index')->with(
             [
-            'kategori' => Kategori::all()
+            'kategori' => $dataKategori
             ]
         );
     }
@@ -41,12 +42,12 @@ class KategoriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         return view('kategori.edit')->with(
             [
-            'txtid' => $id,
+            'txtid' => $id_kategori,
             'txtkategori' => $data->nama_kategori,
             // 'txtnamapemasok' => $data->pemasok
             ]
@@ -56,9 +57,9 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKategoriRequest $request, $id)
+    public function update(UpdateKategoriRequest $request, $id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         $data->nama_kategori = $request->txtkategori;
         $data->save();
 
@@ -68,9 +69,9 @@ class KategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         $data->delete();
         return redirect('kategori')->with('msg', 'Kategori succesfully deleted');
     }

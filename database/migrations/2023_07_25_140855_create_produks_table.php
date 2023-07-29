@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('nama_pemasok');
             $table->timestamps();
 
-            $table->foreign('kategori_id')->references('id')->on('kategori');
-            $table->foreign('pemasok_id')->references('id')->on('pemasok');
+            $table->foreign('kategori_id')->references('id_kategori')->on('kategori');
+            $table->foreign('pemasok_id')->references('id_pemasok')->on('pemasok');
         });
     }
 
