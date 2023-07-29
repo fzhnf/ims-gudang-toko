@@ -23,7 +23,6 @@ class StoreKategoriRequest extends FormRequest
     {
         return [
             'txtkategori' => 'required'
-            
         ];
     }
 }

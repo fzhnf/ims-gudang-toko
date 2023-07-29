@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
