@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
+use Illuminate\Support\Facades\Request;
 
 
 
@@ -14,12 +15,23 @@ class KategoriController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index() 
+    public function index(Request $request) 
     {
-        $dataKategori = Kategori::paginate(10);
+        $searchKategori = request()->query('search');
+
+        if(!empty($searchKategori)) {
+            $dataKategori = Kategori::where('kategori.id_kategori', 'ILIKE', '%' . $searchKategori . '%')
+                ->orWhere('kategori.nama_kategori', 'ILIKE', '%'.$searchKategori.'%')
+                ->paginate(10)->fragment('ktg');
+        } else {
+            $dataKategori = Kategori::paginate(10)->fragment('ktg');
+        }
+     
+        
         return view('kategori.index')->with(
             [
-            'kategori' => $dataKategori
+            'kategori' => $dataKategori,
+            'searchKategori' => $searchKategori
             ]
         );
     }

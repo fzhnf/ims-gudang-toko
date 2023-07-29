@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemasok;
 use App\Http\Requests\StorePemasokRequest;
 use App\Http\Requests\UpdatePemasokRequest;
+use Illuminate\Support\Facades\Request;
 
 class PemasokController extends Controller
 {
@@ -12,12 +13,23 @@ class PemasokController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $dataPemasok = Pemasok::paginate(10);
+        $searchPemasok = request()->query('search');
+
+        if(!empty('search')){
+            $dataPemasok = Pemasok::where('pemasok.id_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
+                ->orWhere('pemasok.nama_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
+                ->paginate(10)->fragment('pms');
+        } else {
+            $dataPemasok = Pemasok::paginate(10)->fragment('pms');
+        }
+
+
         return view('pemasok.index')->with(
             [
-            'pemasok' => $dataPemasok
+            'pemasok' => $dataPemasok,
+            'searchPemasok' => $searchPemasok
             ]
         );
     }
