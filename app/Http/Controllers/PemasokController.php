@@ -16,15 +16,14 @@ class PemasokController extends Controller
     public function index(Request $request)
     {
         $searchPemasok = request()->query('search');
-
         if(!empty('search')){
             $dataPemasok = Pemasok::where('pemasok.id_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
                 ->orWhere('pemasok.nama_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
+                ->orWhere('pemasok.domisili', 'ILIKE', '%' . $searchPemasok . '%')
                 ->paginate(10)->fragment('pms');
         } else {
             $dataPemasok = Pemasok::paginate(10)->fragment('pms');
         }
-
 
         return view('pemasok.index')->with(
             [

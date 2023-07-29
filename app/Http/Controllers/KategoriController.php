@@ -18,7 +18,6 @@ class KategoriController extends Controller
     public function index(Request $request) 
     {
         $searchKategori = request()->query('search');
-
         if(!empty($searchKategori)) {
             $dataKategori = Kategori::where('kategori.id_kategori', 'ILIKE', '%' . $searchKategori . '%')
                 ->orWhere('kategori.nama_kategori', 'ILIKE', '%'.$searchKategori.'%')
@@ -26,8 +25,7 @@ class KategoriController extends Controller
         } else {
             $dataKategori = Kategori::paginate(10)->fragment('ktg');
         }
-     
-        
+       
         return view('kategori.index')->with(
             [
             'kategori' => $dataKategori,
