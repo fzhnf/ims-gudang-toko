@@ -18,7 +18,7 @@ class ProdukController extends Controller
         $dataProdukQuery = Produk::query();
 
         if (!empty($searchProduk)) {
-            $dataProdukQuery->where('produks.nama_produk', 'ILIKE', '%' . $searchProduk . '%');
+            $dataProdukQuery->where('produks.nama_produk', 'ILIKE', $searchProduk . '%');
         }
         $dataProduk = $dataProdukQuery->with('kategori', 'pemasok')
             ->paginate(20)
