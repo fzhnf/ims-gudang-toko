@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +50,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('/pemasok', PemasokController::class);
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::resource('/produk', ProdukController::class);

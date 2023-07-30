@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
+use Illuminate\Support\Facades\Request;
 
 
 
@@ -14,11 +15,21 @@ class KategoriController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index() 
+    public function index(Request $request) 
     {
+        $searchKategori = request()->query('search');
+        if(!empty($searchKategori)) {
+            $dataKategori = Kategori::where('kategori.id_kategori', 'ILIKE', '%' . $searchKategori . '%')
+                ->orWhere('kategori.nama_kategori', 'ILIKE', '%'.$searchKategori.'%')
+                ->paginate(10)->fragment('ktg');
+        } else {
+            $dataKategori = Kategori::paginate(10)->fragment('ktg');
+        }
+       
         return view('kategori.index')->with(
             [
-            'kategori' => Kategori::all()
+            'kategori' => $dataKategori,
+            'searchKategori' => $searchKategori
             ]
         );
     }
@@ -41,12 +52,12 @@ class KategoriController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         return view('kategori.edit')->with(
             [
-            'txtid' => $id,
+            'txtid' => $id_kategori,
             'txtkategori' => $data->nama_kategori,
             // 'txtnamapemasok' => $data->pemasok
             ]
@@ -56,9 +67,9 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKategoriRequest $request, $id)
+    public function update(UpdateKategoriRequest $request, $id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         $data->nama_kategori = $request->txtkategori;
         $data->save();
 
@@ -68,9 +79,9 @@ class KategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_kategori)
     {
-        $data = Kategori::find($id);
+        $data = Kategori::find($id_kategori);
         $data->delete();
         return redirect('kategori')->with('msg', 'Kategori succesfully deleted');
     }
