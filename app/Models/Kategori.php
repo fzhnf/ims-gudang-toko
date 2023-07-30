@@ -19,8 +19,8 @@ class Kategori extends Model {
 	public $timestamps = true;
 	protected $fillable = ['nama_kategori'];
 
-	public function produk() {
-		return $this->hasMany(Produk::class, 'kategori_id');
+	public function produks() {
+		return $this->hasMany(Produk::class, 'kategori_id', 'id_kategori');
 	}
 
 	public function setNamaKategoriAttribute($value) {

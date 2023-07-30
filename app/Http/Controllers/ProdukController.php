@@ -5,19 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Produk;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('produk.index')->with(
-            [
-                'produk' => Produk::all()
-            ]
-        );
+        $searchProduk = request()->query('search');
+        $dataProdukQuery = Produk::query();
+
+        if (!empty($searchProduk)) {
+            $dataProdukQuery->where('produks.nama_produk', 'ILIKE', '%' . $searchProduk . '%');
+        }
+        $dataProduk = $dataProdukQuery->with('kategori', 'pemasok')
+            ->paginate(20)
+            ->fragment('prd');
+
+        return view('produk.index')->with([
+            'produk' => $dataProduk,
+            'searchProduk' => $searchProduk
+        ]);
+
     }
 
     /**

@@ -13,11 +13,15 @@ class Produk extends Model {
 	public $fillable = ['nama_produk', 'quantity', 'harga_per_pcs', 'kategori_id', 'pemasok_id'];
 
 	public function kategori() {
-		return $this->belongsTo(Kategori::class, 'kategori_id');
+		return $this->belongsTo(Kategori::class, 'kategori_id', 'id_kategori');
 	}
 
 	public function pemasok() {
-		return $this->belongsTo(Pemasok::class, 'pemasok_id');
+		return $this->belongsTo(Pemasok::class, 'pemasok_id', 'id_pemasok');
+	}
+
+	public function setNamaProdukAttribute($value) {
+		$this->attributes['nama_produk'] = ucwords($value);
 	}
 
 	public $timestamps = true;

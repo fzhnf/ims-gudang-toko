@@ -17,8 +17,8 @@ class Pemasok extends Model {
 	public $timestamps = true;
 	public $fillable = ['nama_pemasok', 'domisili'];
 
-	public function produk() {
-		return $this->hasMany(Produk::class, 'pemasok_id');
+	public function produks() {
+		return $this->hasMany(Produk::class, 'pemasok_id', 'id_pemasok');
 	}
 
 	public function setNamaPemasokAttribute($value) {
