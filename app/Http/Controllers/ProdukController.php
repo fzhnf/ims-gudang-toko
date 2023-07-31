@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
+use App\Models\Kategori;
+use App\Models\Pemasok;
 use App\Models\Produk;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -61,8 +63,8 @@ class ProdukController extends Controller {
 		$produk->nama_produk = $request->txtproduk;
 		$produk->quantity = $request->txtkuantitas;
 		$produk->harga_per_pcs = $request->txthargaperpcs;
-		$produk->kategori_id = $request->id_kategori;
-		$produk->pemasok_id = $request->id_pemasok;
+		$produk->kategori_id = $kategori->id_kategori;
+		$produk->pemasok_id = $pemasok->id_pemasok;
 		$produk->save();
 
 		return redirect('produk')->with('msg', 'Produk succesfully added');

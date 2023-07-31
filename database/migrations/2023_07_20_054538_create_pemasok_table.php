@@ -12,7 +12,7 @@ return new class extends Migration {
 		Schema::create('pemasok', function (Blueprint $table) {
 			$table->increments('id_pemasok');
 			$table->string('nama_pemasok');
-			$table->string('domisili');
+			$table->string('domisili')->nullable();
 			$table->timestamps();
 		});
 	}
