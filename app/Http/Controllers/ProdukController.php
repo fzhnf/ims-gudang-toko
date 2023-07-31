@@ -71,13 +71,16 @@ class ProdukController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Produk $produk) {
+	public function show($id_produk) {
 		$data = Produk::find($id_produk);
 		return view('produk.edit')->with(
 			[
 				'txtid' => $id_produk,
 				'txtproduk' => $data->nama_produk,
-				'txtkategori' => $data->txtkategori,
+				'txtkategori' => $data->nama_kategori,
+				'txtpemasok' => $data->nama_pemasok,
+				'txtkuantitas' => $data->quantity,
+				'txthargaperpcs' => $data->harga_per_pcs,
 			]
 		);
 	}
@@ -108,7 +111,7 @@ class ProdukController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Produk $produk) {
+	public function destroy($id_produk) {
 		$data = Produk::find($id_produk);
 		$data->delete();
 		return redirect('produk')->with('msg', 'Produk succesfully deleted');
