@@ -12,25 +12,49 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
         <link href="{{ asset('/') }}assets/plugin/fontawesome/css/all.min.css" rel="stylesheet"/>
         
+        {{-- Style --}}
+        <style>
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-20%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideRight {
+                from {
+                    transform: translateX(-5%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+          </style>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-200">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header>
+                    <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8" style="animation: slideDown 1s ease;">
                         {{ $header }}
                     </div>
                 </header>
             @endif
             <!-- Page Content -->
             <main>
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto pb-14 px-4 sm:px-6 lg:px-8">
                     {{ $slot }}
                 </div>
             </main>

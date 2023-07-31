@@ -1,5 +1,5 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-    <div class="flex items-center justify-between pb-4">
+<div class="relative overflow-x-auto mt-1" style="animation: slideDown 1s ease;">
+    <div class="flex items-center justify-between pb-2">
         <div>
             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
                 Sort By
@@ -38,8 +38,10 @@
             </div>
         </form>
     </div>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white" style="animation: slideRight 1s ease;">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
                     Id

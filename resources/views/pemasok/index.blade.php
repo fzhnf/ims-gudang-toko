@@ -2,7 +2,10 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Daftar Pemasok') }}                    
-        </h2>
+        </h2>   
+    </x-slot>
+
+    <x-slot name="slot">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session('msg'))
                 <div id="alert-3" class="flex items-center p-4 mb-2 mt-2 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">

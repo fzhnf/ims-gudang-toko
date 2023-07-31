@@ -24,6 +24,17 @@
                     opacity: 1;
                 }
             }
+
+            @keyframes slideRight {
+                from {
+                    transform: translateX(-20%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
         </style>
 
         <!-- Scripts -->

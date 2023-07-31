@@ -1,5 +1,5 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-    <div class="flex items-center justify-between pb-4">
+<div class="relative overflow-x-auto mt-1" style="animation: slideDown 1s ease;">
+    <div class="flex items-center justify-between pb-2">
         <div>
             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
                 Sort By
@@ -7,7 +7,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                 </svg>
             </button>
-            <button type="button" onclick="window.location='{{ url('pemasok/add') }}'" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm ml-2 px-5 py-1.5 text-center mr-2 mb-2">
+            <button type="button" onclick="window.location='{{ url('produk/add') }}'" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm ml-2 px-5 py-1.5 text-center mr-2 mb-2">
                 <i class="fa-solid fa-plus"></i>
             </button>
             <!-- Dropdown menu -->
@@ -38,8 +38,10 @@
             </div>
         </form>
     </div>
+</div>
+<div class="relative overflow-x-auto shadow-xl sm:rounded-lg bg-white" style="animation: slideRight 1s ease;">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
                     Id
@@ -86,10 +88,10 @@
                     {{$item->harga_per_pcs}}
                 </td>
                 <td class="px-6 py-3 flex">
-                    <button type="button" onclick="window.location='{{ url('pemasok/'.$item->id_pemasok) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-1">
+                    <button type="button" onclick="window.location='{{ url('produk/'.$item->id_produk) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-1">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <form onsubmit="return deleteData('{{ $item->nama_pemasok }}')" method="POST" action="{{ url('pemasok/'.$item->id_pemasok) }}" class="inline">
+                    <form onsubmit="return deleteData('{{ $item->nama_produk }}')" method="POST" action="{{ url('produk/'.$item->id_produk) }}" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2">
