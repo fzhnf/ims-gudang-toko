@@ -13,14 +13,35 @@
         <!-- Styles -->
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
 
+        <style>
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-20%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     </head>
     <body class="antialiased bg-cover bg-center" style="background-image: url('/img/welcome-bg.jpg');">
         <div class="flex justify-center items-center h-screen bg-opacity-25 bg-white dark:bg-opacity-50">
             @if (Route::has('login'))
-            <div class="bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50 rounded-lg shadow-md p-8">
+            <div class="bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50 rounded-lg shadow-md p-8" style="animation: slideDown 1s ease;">
                 <img src="/img/inventory-logo.png" class="mr-auto ml-auto mb-2" alt="inv" srcset="">
                 <div class="text-center">
                     <h1 class="text-4xl font-semibold text-gray-800 dark:text-white mb-3">Inventory Management System</h1>
