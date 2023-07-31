@@ -77,8 +77,8 @@ class ProdukController extends Controller {
 			[
 				'txtid' => $id_produk,
 				'txtproduk' => $data->nama_produk,
-				'txtkategori' => $data->nama_kategori,
-				'txtpemasok' => $data->nama_pemasok,
+				'txtkategori' => $data->kategori->nama_kategori,
+				'txtpemasok' => $data->pemasok->nama_pemasok,
 				'txtkuantitas' => $data->quantity,
 				'txthargaperpcs' => $data->harga_per_pcs,
 			]
