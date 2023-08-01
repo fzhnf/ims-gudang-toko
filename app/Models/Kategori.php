@@ -27,11 +27,11 @@ class Kategori extends Model {
 		$this->attributes['nama_kategori'] = ucwords($value);
 	}
 
-	protected static function boot() {
-		parent::boot();
+	// protected static function boot() {
+	// 	parent::boot();
 
-		static::addGlobalScope('orderByNamaKategori', function ($query) {
-			$query->orderBy('nama_kategori', 'asc');
-		});
-	}
+	// 	static::addGlobalScope('orderByNamaKategori', function ($query) {
+	// 		$query->orderBy('nama_kategori', 'asc');
+	// 	});
+	// }
 }

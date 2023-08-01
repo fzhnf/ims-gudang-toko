@@ -29,11 +29,11 @@ class Pemasok extends Model {
 		$this->attributes['domisili'] = ucwords($value);
 	}
 
-	protected static function boot() {
-		parent::boot();
+	// protected static function boot() {
+	// 	parent::boot();
 
-		static::addGlobalScope('orderByNamaPemasok', function ($query) {
-			$query->orderBy('nama_pemasok', 'asc');
-		});
-	}
+	// 	static::addGlobalScope('orderByNamaPemasok', function ($query) {
+	// 		$query->orderBy('nama_pemasok', 'asc');
+	// 	});
+	// }
 }

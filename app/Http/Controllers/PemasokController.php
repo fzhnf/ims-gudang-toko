@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePemasokRequest;
 use App\Http\Requests\UpdatePemasokRequest;
 use App\Models\Pemasok;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class PemasokController extends Controller {
 	/**
@@ -13,23 +15,38 @@ class PemasokController extends Controller {
 	 */
 
 	public function index(Request $request) {
-		$searchPemasok = request()->query('search');
-		if (!empty('search')) {
-			$dataPemasok = Pemasok::where('pemasok.nama_pemasok', 'ILIKE', $searchPemasok . '%')
-				->orWhere('pemasok.domisili', 'ILIKE', $searchPemasok . '%')
-				->paginate(10)->fragment('pms');
-		} else {
-			$dataPemasok = Pemasok::paginate(10)->fragment('pms');
+		$searchPemasok = $request->query('search');
+		$sortBy = $request->query('sort');
+
+		$query = Pemasok::query();
+		if (!empty($searchPemasok)) {
+			$query->where(function (Builder $q) use ($searchPemasok) {
+				$q->where('nama_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
+					->orWhere('domisili', 'ILIKE', '%' . $searchPemasok . '%');
+			});
 		}
 
-		return view('pemasok.index')->with(
-			[
-				'pemasok' => $dataPemasok,
-				'searchPemasok' => $searchPemasok,
-			]
-		);
-	}
+		if ($sortBy === 'nama_pemasok_az') {
+			$query->orderBy('nama_pemasok', 'asc');
+		} elseif ($sortBy === 'nama_pemasok_za') {
+			$query->orderBy('nama_pemasok', 'desc');
+		} elseif ($sortBy === 'domisili_az') {
+			$query->orderBy('domisili', 'asc');
+		} elseif ($sortBy === 'domisili_za') {
+			$query->orderBy('domisili', 'desc');
+		} else {
+			// Default sorting if no sort parameter is provided
+			$query->orderBy('nama_pemasok', 'asc');
+		}
 
+		$dataPemasok = $query->paginate(10)->appends(['search' => $searchPemasok, 'sort' => $sortBy])->fragment('pms');
+
+		return view('pemasok.index')->with([
+			'pemasok' => $dataPemasok,
+			'searchPemasok' => $searchPemasok,
+			'sortBy' => $sortBy,
+		]);
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 */
