@@ -32,8 +32,8 @@ class Pemasok extends Model {
 	protected static function boot() {
 		parent::boot();
 
-		static::addGlobalScope('orderById', function ($query) {
-			$query->orderBy('id_pemasok', 'asc');
+		static::addGlobalScope('orderByNamaPemasok', function ($query) {
+			$query->orderBy('nama_pemasok', 'asc');
 		});
 	}
 }

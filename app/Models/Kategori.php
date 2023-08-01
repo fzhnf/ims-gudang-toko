@@ -30,8 +30,8 @@ class Kategori extends Model {
 	protected static function boot() {
 		parent::boot();
 
-		static::addGlobalScope('orderById', function ($query) {
-			$query->orderBy('id_kategori', 'asc');
+		static::addGlobalScope('orderByNamaKategori', function ($query) {
+			$query->orderBy('nama_kategori', 'asc');
 		});
 	}
 }

@@ -46,11 +46,13 @@ class ProdukController extends Controller {
 	public function store(StoreProdukRequest $request) {
 		$validated = $request->validated();
 
+		$kategoriName = ucwords($validated['txtkategori']);
+		$pemasokName = ucwords($validated['txtpemasok']);
 		// Check if the kategori already exists, otherwise create a new one
-		$kategori = Kategori::firstOrCreate(['nama_kategori' => $validated['txtkategori']]);
+		$kategori = Kategori::firstOrCreate(['nama_kategori' => $kategoriName]);
 
 		// Check if the pemasok already exists, otherwise create a new one
-		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $validated['txtpemasok']]);
+		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $pemasokName]);
 
 		// Create the new Produk instance with the provided data and the IDs of kategori and pemasok
 		$produk = new Produk([
@@ -97,11 +99,13 @@ class ProdukController extends Controller {
 		// ...
 		$data = Produk::find($id_produk);
 
+		$kategoriName = ucwords($validated['txtkategori']);
+		$pemasokName = ucwords($validated['txtpemasok']);
 		// Check if the kategori already exists, otherwise create a new one
-		$kategori = Kategori::firstOrCreate(['nama_kategori' => $request->txtkategori]);
+		$kategori = Kategori::firstOrCreate(['nama_kategori' => $kategoriName]);
 
 		// Check if the pemasok already exists, otherwise create a new one
-		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $request->txtpemasok]);
+		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $pemasokName]);
 
 		$data->nama_produk = $request->txtproduk;
 		$data->kategori_id = $kategori->id_kategori;
@@ -111,9 +115,8 @@ class ProdukController extends Controller {
 		$data->save();
 
 		// Update the kategori and pemasok in their respective tables
-		DB::table('kategori')->where('id_kategori', $kategori->id_kategori)->update(['nama_kategori' => $request->txtkategori]);
-		DB::table('pemasok')->where('id_pemasok', $pemasok->id_pemasok)->update(['nama_pemasok' => $request->txtpemasok]);
-
+		DB::table('kategori')->where('id_kategori', $kategori->id_kategori)->update(['nama_kategori' => $kategoriName]);
+		DB::table('pemasok')->where('id_pemasok', $pemasok->id_pemasok)->update(['nama_pemasok' => $pemasokName]);
 		return redirect('produk')->with('msg', 'Produk successfully updated');
 	}
 	/**
