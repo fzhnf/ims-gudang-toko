@@ -42,34 +42,28 @@ class ProdukController extends Controller {
 	 * Store a newly created resource in storage.
 	 */
 	public function store(StoreProdukRequest $request) {
-		$validate = $request->validated();
+		$validated = $request->validated();
 
-		$kategori = Kategori::where('nama_kategori', $request->txtkategori)->first();
-		if (!$kategori) {
-			$kategori = new Kategori;
-			$kategori->nama_kategori = $request->txtkategori;
-			$kategori->save();
-		}
+		// Check if the kategori already exists, otherwise create a new one
+		$kategori = Kategori::firstOrCreate(['nama_kategori' => $validated['txtkategori']]);
 
-		$pemasok = Pemasok::where('nama_pemasok', $request->txtpemasok)->first();
-		if (!$pemasok) {
-			$pemasok = new Pemasok;
-			$pemasok->nama_pemasok = $request->txtpemasok;
-			$pemasok->save();
-		}
+		// Check if the pemasok already exists, otherwise create a new one
+		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $validated['txtpemasok']]);
 
-		$produk = new Produk;
+		// Create the new Produk instance with the provided data and the IDs of kategori and pemasok
+		$produk = new Produk([
+			'nama_produk' => $validated['txtproduk'],
+			'quantity' => $validated['txtkuantitas'],
+			'harga_per_pcs' => $validated['txthargaperpcs'],
+			'kategori_id' => $kategori->id_kategori,
+			'pemasok_id' => $pemasok->id_pemasok,
+		]);
 
-		$produk->nama_produk = $request->txtproduk;
-		$produk->quantity = $request->txtkuantitas;
-		$produk->harga_per_pcs = $request->txthargaperpcs;
-		$produk->kategori_id = $kategori->id_kategori;
-		$produk->pemasok_id = $pemasok->id_pemasok;
+		// Save the new Produk to the database
 		$produk->save();
 
-		return redirect('produk')->with('msg', 'Produk succesfully added');
+		return redirect('produk')->with('msg', 'Produk successfully added');
 	}
-
 	/**
 	 * Display the specified resource.
 	 */
@@ -91,19 +85,18 @@ class ProdukController extends Controller {
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(Produk $produk) {
-		//
+		return view('produk.edit')->with('produk', $produk);
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 */
 	public function update(UpdateProdukRequest $request, Produk $produk) {
-		$data = Produk::find($id_produk);
 		$data->nama_produk = $request->txtproduk;
-		$data->kategori = $request->txtkategori;
-		$data->pemasok = $request->txtpemasok;
+		$data->kategori_id = $request->id_kategori;
+		$data->pemasok_id = $request->id_pemasok;
 		$data->quantity = $request->txtkuantitas;
-		$data->harga_per_pcs = $request->txtkuantitas;
+		$data->harga_per_pcs = $request->txthargaperpcs;
 		$data->save();
 
 		return redirect('produk')->with('msg', 'Produk succesfully updated');

@@ -13,7 +13,7 @@ class Pemasok extends Model {
 	use HasFactory;
 	protected $table = 'pemasok';
 	protected $primaryKey = 'id_pemasok';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = true;
 	public $fillable = ['nama_pemasok', 'domisili'];
 
