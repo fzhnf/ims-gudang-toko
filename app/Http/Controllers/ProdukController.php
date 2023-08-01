@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Kategori;
 use App\Models\Pemasok;
 use App\Models\Produk;
+use DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProdukController extends Controller {
@@ -85,24 +86,35 @@ class ProdukController extends Controller {
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(Produk $produk) {
-		return view('produk.edit')->with('produk', $produk);
+		// return view('produk.edit')->with('produk', $produk);
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(UpdateProdukRequest $request, Produk $produk) {
+	public function update(UpdateProdukRequest $request, $id_produk) {
+		// ...
+		$data = Produk::find($id_produk);
+
+		// Check if the kategori already exists, otherwise create a new one
+		$kategori = Kategori::firstOrCreate(['nama_kategori' => $request->txtkategori]);
+
+		// Check if the pemasok already exists, otherwise create a new one
+		$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $request->txtpemasok]);
+
 		$data->nama_produk = $request->txtproduk;
-		$data->kategori_id = $request->id_kategori;
-		$data->pemasok_id = $request->id_pemasok;
+		$data->kategori_id = $kategori->id_kategori;
+		$data->pemasok_id = $pemasok->id_pemasok;
 		$data->quantity = $request->txtkuantitas;
 		$data->harga_per_pcs = $request->txthargaperpcs;
 		$data->save();
 
-		return redirect('produk')->with('msg', 'Produk succesfully updated');
+		// Update the kategori and pemasok in their respective tables
+		DB::table('kategori')->where('id_kategori', $kategori->id_kategori)->update(['nama_kategori' => $request->txtkategori]);
+		DB::table('pemasok')->where('id_pemasok', $pemasok->id_pemasok)->update(['nama_pemasok' => $request->txtpemasok]);
 
+		return redirect('produk')->with('msg', 'Produk successfully updated');
 	}
-
 	/**
 	 * Remove the specified resource from storage.
 	 */

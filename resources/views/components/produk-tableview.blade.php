@@ -76,10 +76,10 @@
                     {{$item->nama_produk}}
                 </th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$item->kategori->nama_kategori}}
+                    {{$item->kategori ? $item->kategori->nama_kategori : 'No category'}}
                 </th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$item->pemasok->nama_pemasok}}
+                    {{$item->pemasok ? $item->pemasok->nama_pemasok : 'No supplier'}}
                 </th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{$item->quantity}}
