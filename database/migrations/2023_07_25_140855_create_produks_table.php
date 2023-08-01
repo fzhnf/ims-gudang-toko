@@ -18,8 +18,8 @@ return new class extends Migration {
 			$table->float('harga_per_pcs')->nullable();
 			$table->timestamps();
 
-			$table->foreign('kategori_id')->references('id_kategori')->on('kategori');
-			$table->foreign('pemasok_id')->references('id_pemasok')->on('pemasok');
+			$table->foreign('kategori_id')->references('id_kategori')->on('kategori')->onDelete('SET NULL');
+			$table->foreign('pemasok_id')->references('id_pemasok')->on('pemasok')->onDelete('SET NULL');
 		});
 	}
 

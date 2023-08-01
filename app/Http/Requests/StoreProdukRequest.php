@@ -21,8 +21,8 @@ class StoreProdukRequest extends FormRequest {
 	{
 		return [
 			'txtproduk' => 'required|string|max:255',
-			'txtkategori' => 'required|string|max:255',
-			'txtpemasok' => 'required|string|max:255',
+			'txtkategori' => 'string|max:255',
+			'txtpemasok' => 'string|max:255',
 			'txtkuantitas' => 'required|string|max:255',
 			'txthargaperpcs' => 'required|string|max:255',
 		];

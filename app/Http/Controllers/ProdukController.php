@@ -7,7 +7,8 @@ use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Kategori;
 use App\Models\Pemasok;
 use App\Models\Produk;
-use DB;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProdukController extends Controller {
@@ -120,8 +121,34 @@ class ProdukController extends Controller {
 	 */
 	public function destroy($id_produk) {
 		$data = Produk::find($id_produk);
-		$data->delete();
-		return redirect('produk')->with('msg', 'Produk succesfully deleted');
 
+		// Cari apakah ada relasi dengan pemasok atau kategori
+		$pemasok = $data->pemasok;
+		$kategori = $data->kategori;
+
+		// Hapus relasi dengan pemasok dan kategori (reset to NULL)
+		$data->pemasok_id = null;
+		$data->kategori_id = null;
+		$data->save();
+
+		// Hapus produk dari database
+		$data->delete();
+
+		// Jika pemasok atau kategori sudah tidak memiliki produk terkait, hapus dari database
+		try {
+			if ($pemasok && $pemasok->produks->isEmpty()) {
+				$pemasok->delete();
+			}
+
+			if ($kategori && $kategori->produks->isEmpty()) {
+				$kategori->delete();
+			}
+		} catch (QueryException $e) {
+			// Jika ada kesalahan saat menghapus pemasok atau kategori (karena masih ada produk lain yang terhubung),
+			// tampilkan pesan kesalahan
+			return redirect('produk')->with('error', 'Cannot delete pemasok or kategori because there are still products associated with it.');
+		}
+
+		return redirect('produk')->with('msg', 'Produk successfully deleted');
 	}
 }
