@@ -29,4 +29,18 @@ class Produk extends Model {
 	}
 
 	public $timestamps = true;
+
+	protected static function boot() {
+		parent::boot();
+		static::saving(function ($produk) {
+			$kategoriName = ucwords($produk->kategori->nama_kategori);
+			$pemasokName = ucwords($produk->pemasok->nama_pemasok);
+
+			$kategori = Kategori::firstOrCreate(['nama_kategori' => $kategoriName]);
+			$pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $pemasokName]);
+
+			$produk->kategori_id = $kategori->id_kategori;
+			$produk->pemasok_id = $pemasok->id_pemasok;
+		});
+	}
 }
