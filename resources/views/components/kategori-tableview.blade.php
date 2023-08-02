@@ -51,7 +51,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
-                    Id
+                    No
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Kategori
