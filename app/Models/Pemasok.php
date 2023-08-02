@@ -13,7 +13,7 @@ class Pemasok extends Model {
 	use HasFactory;
 	protected $table = 'pemasok';
 	protected $primaryKey = 'id_pemasok';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $timestamps = true;
 	public $fillable = ['nama_pemasok', 'domisili'];
 
@@ -29,11 +29,11 @@ class Pemasok extends Model {
 		$this->attributes['domisili'] = ucwords($value);
 	}
 
-	protected static function boot() {
-		parent::boot();
+	// protected static function boot() {
+	// 	parent::boot();
 
-		static::addGlobalScope('orderById', function ($query) {
-			$query->orderBy('id_pemasok', 'asc');
-		});
-	}
+	// 	static::addGlobalScope('orderByNamaPemasok', function ($query) {
+	// 		$query->orderBy('nama_pemasok', 'asc');
+	// 	});
+	// }
 }

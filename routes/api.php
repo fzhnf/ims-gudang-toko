@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/
+ */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });
 Route::get('/kategori', [KategoriController::class, 'index']);
 Route::post('/kategori', [KategoriController::class, 'store']);
@@ -29,4 +29,3 @@ Route::get('/pemasok/{id}', [PemasokController::class, 'show']);
 Route::put('/pemasok/{id}', [PemasokController::class, 'update']);
 Route::delete('/pemasok/{id}', [PemasokController::class, 'destroy']);
 Route::get('/pemasok/{id}/barang', [PemasokController::class, 'barang']);
-

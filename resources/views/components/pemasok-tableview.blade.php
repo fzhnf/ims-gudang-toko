@@ -2,19 +2,19 @@
     <div class="flex items-center justify-between pb-1">
         <div>
             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                Sort By
-                <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
+            Sort By
+            <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
             </button>
             <button type="button" onclick="window.location='{{ url('pemasok/add') }}'" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm ml-2 px-5 py-1.5 text-center mr-2 mb-2">
-                <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus"></i>
             </button>
         </div>
         <button id="backButton" class="text-gray-900 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm ml-auto px-5 py-1.5 text-center hidden">
             <i class="fa-solid fa-arrow-left"></i>
         </button>  
-        <form method="GET" class="ml-3">
+        <form method="GET">
             <label for="search" class="sr-only">Search</label>
             <div class="relative py-1.5">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -30,16 +30,24 @@
     <div id="dropdownRadio" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
         <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
             <li>
-                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input id="filter-radio-example-1" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-1" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Pemasok</label>
-                </div>
+                <a href="{{ route('pemasok.index', ['sort' => 'nama_pemasok_az']) }}" class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    Nama Pemasok (A-Z)
+                </a>
             </li>
             <li>
-                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <input checked="" id="filter-radio-example-2" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="filter-radio-example-2" class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Domisili</label>
-                </div>
+                <a href="{{ route('pemasok.index', ['sort' => 'nama_pemasok_za']) }}" class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    Nama Pemasok (Z-A)
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pemasok.index', ['sort' => 'domisili_az']) }}" class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    Domisili (A-Z)
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('pemasok.index', ['sort' => 'domisili_za']) }}" class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    Domisili (Z-A)
+                </a>
             </li>
         </ul>
     </div>

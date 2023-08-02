@@ -2,10 +2,10 @@
     <div class="flex items-center justify-between pb-1">
         <div>
             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                Sort By
-                <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
+            Sort By
+            <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
             </button>
             <button type="button" onclick="window.location='{{ url('kategori/add') }}'" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm ml-2 px-5 py-1.5 text-center mr-2">
                 <i class="fa-solid fa-plus"></i>
@@ -47,7 +47,7 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
-                    No
+                    Id
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Kategori
@@ -61,34 +61,34 @@
             </tr>
         </thead>
         <tbody>
-            @php
-                $nomor = 1 + ($kategori->currentPage() - 1) * $kategori->perPage()
-            @endphp
-            @foreach ($kategori as $item)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        {{$nomor++}}
-                    </td>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$item->nama_kategori}}
-                    </th>
-    {{--                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$item->pemasok}}
-                    </th> --}}
-                    <td class="px-6 py-3 flex">
-                        <button type="button" onclick="window.location='{{ url('kategori/'.$item->id_kategori) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-1 ">
-                            <i class="fa-solid fa-pen-to-square"></i>
+        @php
+            $nomor = 1 + ($kategori->currentPage() - 1) * $kategori->perPage()
+        @endphp
+        @foreach ($kategori as $item)
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    {{$nomor++}}
+                </td>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{$item->nama_kategori}}
+                </th>
+{{--                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{$item->pemasok}}
+                </th> --}}
+                <td class="px-6 py-3 flex">
+                    <button type="button" onclick="window.location='{{ url('kategori/'.$item->id_kategori) }}'" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-1 ">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <form onsubmit="return deleteData('{{ $item->nama_kategori }}')" method="POST" action="{{ url('kategori/'.$item->id_kategori) }}" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2 ">
+                            <i class="fa-solid fa-trash"></i>
                         </button>
-                        <form onsubmit="return deleteData('{{ $item->nama_kategori }}')" method="POST" action="{{ url('kategori/'.$item->id_kategori) }}" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-4 py-1 text-center mr-2 ">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>          
-            @endforeach
+                    </form>
+                </td>
+            </tr>          
+        @endforeach
         </tbody>
     </table>
     <div class="m-3">

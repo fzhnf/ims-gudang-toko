@@ -9,15 +9,19 @@ class Produk extends Model {
 	use HasFactory;
 	protected $table = 'produks';
 	protected $primaryKey = 'id_produk';
-	public $incrementing = false;
+	public $incrementing = true;
 	public $fillable = ['nama_produk', 'quantity', 'harga_per_pcs', 'kategori_id', 'pemasok_id'];
 
 	public function kategori() {
-		return $this->belongsTo(Kategori::class, 'kategori_id', 'id_kategori');
+		return $this->belongsTo(Kategori::class, 'kategori_id', 'id_kategori')->withDefault([
+			'nama_kategori' => 'No Category',
+		]);
 	}
 
 	public function pemasok() {
-		return $this->belongsTo(Pemasok::class, 'pemasok_id', 'id_pemasok');
+		return $this->belongsTo(Pemasok::class, 'pemasok_id', 'id_pemasok')->withDefault([
+			'nama_pemasok' => 'No Supplier',
+		]);
 	}
 
 	public function setNamaProdukAttribute($value) {
