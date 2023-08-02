@@ -108,7 +108,7 @@ class ProdukController extends Controller {
 		if (!empty($validated['txtkategori'])) {
 			$kategoriName = ucwords($validated['txtkategori']);
 			$kategori = Kategori::updateOrCreate(
-				['id_kategori' => $oldKategoriId], // Set ID kategori eksplisit
+				['id_kategori' => $oldKategoriId],
 				['nama_kategori' => $kategoriName]
 			);
 			$data->kategori()->associate($kategori);
@@ -117,7 +117,7 @@ class ProdukController extends Controller {
 		if (!empty($validated['txtpemasok'])) {
 			$pemasokName = ucwords($validated['txtpemasok']);
 			$pemasok = Pemasok::updateOrCreate(
-				['id_pemasok' => $oldPemasokId], // Set ID pemasok eksplisit
+				['id_pemasok' => $oldPemasokId],
 				['nama_pemasok' => $pemasokName]
 			);
 			$data->pemasok()->associate($pemasok);
@@ -153,9 +153,6 @@ class ProdukController extends Controller {
 
 		// Hapus produk dari database
 		$data->delete();
-
-		// Jika pemasok atau kategori sudah tidak memiliki produk terkait, hapus dari database
-		// (Kode yang menghapus kategori dan pemasok saat tidak memiliki produk terkait telah dihapus)
 
 		// Update the kategori and pemasok in their respective tables if the association has changed
 		if ($oldKategoriId !== null) {
