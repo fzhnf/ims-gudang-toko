@@ -14,7 +14,7 @@
         <button id="backButton" class="text-gray-900 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm ml-auto px-5 py-1.5 text-center hidden">
             <i class="fa-solid fa-arrow-left"></i>
         </button>  
-        <form method="GET">
+        <form method="GET" class="ml-3">
             <label for="search" class="sr-only">Search</label>
             <div class="relative py-1.5">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
