@@ -21,8 +21,8 @@ class PemasokController extends Controller {
 		$query = Pemasok::query();
 		if (!empty($searchPemasok)) {
 			$query->where(function (Builder $q) use ($searchPemasok) {
-				$q->where('nama_pemasok', 'ILIKE', '%' . $searchPemasok . '%')
-					->orWhere('domisili', 'ILIKE', '%' . $searchPemasok . '%');
+				$q->where('nama_pemasok', 'ILIKE', $searchPemasok . '%')
+					->orWhere('domisili', 'ILIKE', $searchPemasok . '%');
 			});
 		}
 
