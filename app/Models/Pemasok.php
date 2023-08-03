@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pemasok extends Model {
-	// public function kategori()
-	// {
-	//   return $this->hasMany(Kategori::class, 'nama_pemasok', 'id');
-	// }
+
 	use HasFactory;
 	protected $table = 'pemasok';
 	protected $primaryKey = 'id_pemasok';
@@ -29,11 +26,11 @@ class Pemasok extends Model {
 		$this->attributes['domisili'] = ucwords($value);
 	}
 
-	// protected static function boot() {
-	// 	parent::boot();
+	public function __construct(array $attributes = []) {
+		parent::__construct($attributes);
 
-	// 	static::addGlobalScope('orderByNamaPemasok', function ($query) {
-	// 		$query->orderBy('nama_pemasok', 'asc');
-	// 	});
-	// }
+		if (empty($this->attributes['domisili'])) {
+			$this->attributes['domisili'] = '-';
+		}
+	}
 }
