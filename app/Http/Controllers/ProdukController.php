@@ -7,17 +7,27 @@ use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Kategori;
 use App\Models\Pemasok;
 use App\Models\Produk;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller {
-	public function index() {
-		$searchProduk = request()->query('search');
-		$sortBy = request()->query('sort');
+	public function index(Request $request) {
+		$searchProduk = $request->query('search');
+		$sortBy = $request->query('sort');
 
 		$dataProdukQuery = Produk::query();
 
 		if (!empty($searchProduk)) {
-			$dataProdukQuery->where('nama_produk', 'ILIKE', $searchProduk . '%');
+			$dataProdukQuery->where(function (Builder $q) use ($searchProduk) {
+				$q->where('nama_produk', 'ILIKE', $searchProduk . '%')
+					->orWhereHas('kategori', function ($q) use ($searchProduk) {
+						$q->where('nama_kategori', 'ILIKE', $searchProduk . '%');
+					})
+					->orWhereHas('pemasok', function ($q) use ($searchProduk) {
+						$q->where('nama_pemasok', 'ILIKE', $searchProduk . '%');
+					});
+			});
 		}
 
 		if ($sortBy == 'nama_produk_az') {
@@ -36,6 +46,8 @@ class ProdukController extends Controller {
 		} elseif ($sortBy == 'nama_pemasok_za') {
 			$dataProdukQuery->join('pemasok', 'produks.pemasok_id', '=', 'pemasok.id_pemasok')
 				->orderBy('pemasok.nama_pemasok', 'desc');
+		} else {
+			$dataProdukQuery->orderBy('nama_produk', 'asc');
 		}
 
 		$dataProduk = $dataProdukQuery->with('kategori', 'pemasok')->paginate(20);
@@ -46,7 +58,9 @@ class ProdukController extends Controller {
 			'sortBy' => $sortBy,
 		]);
 	}
-
+	/**
+	 * Store a newly created resource in storage.
+	 */
 	public function store(StoreProdukRequest $request) {
 		$validated = $request->validated();
 
