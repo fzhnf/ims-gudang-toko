@@ -43,6 +43,7 @@ class ProdukController extends Controller {
 		return view('produk.index', [
 			'produk' => $dataProduk,
 			'searchProduk' => $searchProduk,
+			'sortBy' => $sortBy,
 		]);
 	}
 
