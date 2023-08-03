@@ -28,6 +28,8 @@ class KategoriController extends Controller {
 			$query->orderBy('nama_kategori', 'asc');
 		} elseif ($sortBy === 'nama_kategori_za') {
 			$query->orderBy('nama_kategori', 'desc');
+		} else {
+			$query->orderBy('nama_kategori', 'asc');
 		}
 
 		$dataKategori = $query->paginate(10)->fragment('ktg');
