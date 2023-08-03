@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="slot">
-        <button type="submit" onclick="window.location='{{ url('kategori') }}'" class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-2 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-700 mb-2">
+        <button type="submit" onclick="window.location='{{ url('kategori') }}'" class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-2 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-700 mb-2 float-right">
           <i class="fa-solid fa-arrow-left pr-1"></i>Kembali
         </button>
         <h1 class="text-2xl font-semibold mb-2 text-green-600/100 dark:text-blue-500/100">Create Kategori</h1>

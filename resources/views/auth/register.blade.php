@@ -3,6 +3,7 @@
         @csrf
 
         <!-- Name -->
+        <h1 class="text-2xl font-semibold text-gray-600 dark:text-white  text-center">Register<i class="fa-regular fa-registered ml-2"></i></h1>
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

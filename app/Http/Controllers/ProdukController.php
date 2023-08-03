@@ -4,116 +4,169 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
+use App\Models\Kategori;
+use App\Models\Pemasok;
 use App\Models\Produk;
-
-// {
-//     // public function kategori()
-//     // {
-//     //   return $this->hasMany(Kategori::class, 'nama_pemasok', 'id');
-//     // }
-//     use HasFactory;
-//     protected $table = 'pemasok';
-//     protected $primaryKey = 'id';
-//     public $incrementing = false;
-//     public $timestamps = true;
-//     public $fillable = ['nama_pemasok', 'domisili'];
-//
-//     public function produk(){
-//         return $this->hasMany(Produk::class, 'pemasok_id');
-//     }
-//     
-// }
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('produk.index')->with(
-            [
-                'produks' => Produk::all()
+        $searchProduk = $request->query('search');
+        $sortBy = $request->query('sort');
+
+        $dataProdukQuery = Produk::query();
+
+        if (!empty($searchProduk)) {
+            $dataProdukQuery->where(
+                function (Builder $q) use ($searchProduk) {
+                    $q->where('nama_produk', 'ILIKE', $searchProduk . '%')
+                        ->orWhereHas(
+                            'kategori', function ($q) use ($searchProduk) {
+                                $q->where('nama_kategori', 'ILIKE', $searchProduk . '%');
+                            }
+                        )
+                    ->orWhereHas(
+                        'pemasok', function ($q) use ($searchProduk) {
+                            $q->where('nama_pemasok', 'ILIKE', $searchProduk . '%');
+                        }
+                    );
+                }
+            );
+        }
+
+        if ($sortBy == 'nama_produk_az') {
+            $dataProdukQuery->orderBy('nama_produk', 'asc');
+        } elseif ($sortBy == 'nama_produk_za') {
+            $dataProdukQuery->orderBy('nama_produk', 'desc');
+        } elseif ($sortBy == 'nama_kategori_az') {
+            $dataProdukQuery->join('kategori', 'produks.kategori_id', '=', 'kategori.id_kategori')
+                ->orderBy('kategori.nama_kategori', 'asc');
+        } elseif ($sortBy == 'nama_kategori_za') {
+            $dataProdukQuery->join('kategori', 'produks.kategori_id', '=', 'kategori.id_kategori')
+                ->orderBy('kategori.nama_kategori', 'desc');
+        } elseif ($sortBy == 'nama_pemasok_az') {
+            $dataProdukQuery->join('pemasok', 'produks.pemasok_id', '=', 'pemasok.id_pemasok')
+                ->orderBy('pemasok.nama_pemasok', 'asc');
+        } elseif ($sortBy == 'nama_pemasok_za') {
+            $dataProdukQuery->join('pemasok', 'produks.pemasok_id', '=', 'pemasok.id_pemasok')
+                ->orderBy('pemasok.nama_pemasok', 'desc');
+        } else {
+            $dataProdukQuery->orderBy('nama_produk', 'asc');
+        }
+
+        $dataProduk = $dataProdukQuery->with('kategori', 'pemasok')->paginate(20);
+
+        return view(
+            'produk.index', [
+            'produk' => $dataProduk,
+            'searchProduk' => $searchProduk,
+            'sortBy' => $sortBy,
             ]
         );
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('produk.create');
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreProdukRequest $request)
     {
-        $validate = $request->validated();
+        $validated = $request->validated();
 
-        $produk = new Produk;
-        $produk->nama_produk = $request->txtnamaproduk;
-        $produk->harga = $request->txtharga;
-        $produk->stok = $request->txtstok;
-        $produk->pemasok_id = $request->txtpemasok;
-        $produk->kategori_id = $request->txtkategori;
+        $kategoriName = ucwords($validated['txtkategori']);
+        $pemasokName = ucwords($validated['txtpemasok']);
+
+        $kategori = Kategori::firstOrCreate(['nama_kategori' => $kategoriName]);
+        $pemasok = Pemasok::firstOrCreate(['nama_pemasok' => $pemasokName]);
+
+        $produk = new Produk(
+            [
+            'nama_produk' => $validated['txtproduk'],
+            'quantity' => $validated['txtkuantitas'],
+            'harga_per_pcs' => $validated['txthargaperpcs'],
+            'kategori_id' => $kategori->id_kategori,
+            'pemasok_id' => $pemasok->id_pemasok,
+            ]
+        );
+
         $produk->save();
 
-        return redirect('produk')->with('msg', 'Produk succesfully added');
+        return redirect('produk')->with('msg', 'Produk successfully added');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function show($id_produk)
     {
-        $data = Produk::find($id);
-        return view('produk.edit')->with(
-            [
-                'txtid' => $id,
-                'txtnamaproduk' => $data->nama_produk,
-                'txtharga' => $data->harga,
-                'txtstok' => $data->stok,
-                'txtpemasok' => $data->pemasok_id,
-                'txtkategori' => $data->kategori_id
+        $data = Produk::find($id_produk);
+
+        return view(
+            'produk.edit', [
+            'txtid' => $id_produk,
+            'txtproduk' => $data->nama_produk,
+            'txtkategori' => optional($data->kategori)->nama_kategori,
+            'txtpemasok' => optional($data->pemasok)->nama_pemasok,
+            'txtkuantitas' => $data->quantity,
+            'txthargaperpcs' => $data->harga_per_pcs,
             ]
         );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produk $produk)
-    { 
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProdukRequest $request, $id)
+    public function update(UpdateProdukRequest $request, $id_produk)
     {
-        $data = Produk::find($id);
-        $data->nama_produk = $request->txtnamaproduk;
-        $data->harga = $request->txtharga;
-        $data->stok = $request->txtstok;
-        $data->pemasok_id = $request->txtpemasok;
-        $data->kategori_id = $request->txtkategori;
+        $validated = $request->validated();
+        $data = Produk::find($id_produk);
+
+        $data->nama_produk = $request->txtproduk;
+        $data->quantity = $request->txtkuantitas;
+        $data->harga_per_pcs = $request->txthargaperpcs;
+
+        if (!empty($validated['txtkategori'])) {
+            $kategoriName = ucwords($validated['txtkategori']);
+            $kategori = Kategori::updateOrCreate(
+                ['id_kategori' => optional($data->kategori)->id_kategori],
+                ['nama_kategori' => $kategoriName]
+            );
+            $data->kategori_id = $kategori->id_kategori;
+        }
+
+        if (!empty($validated['txtpemasok'])) {
+            $pemasokName = ucwords($validated['txtpemasok']);
+            $pemasok = Pemasok::updateOrCreate(
+                ['id_pemasok' => optional($data->pemasok)->id_pemasok],
+                ['nama_pemasok' => $pemasokName]
+            );
+            $data->pemasok_id = $pemasok->id_pemasok;
+        }
+
         $data->save();
 
-        return redirect('produk')->with('msg', 'Produk succesfully updated');
+        return redirect('produk')->with('msg', 'Produk successfully updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
+    public function destroy($id_produk)
     {
-        $data = Produk::find($id);
+        $data = Produk::find($id_produk);
+
+        $oldKategoriId = optional($data->kategori)->id_kategori;
+        $oldPemasokId = optional($data->pemasok)->id_pemasok;
+
+        $data->pemasok_id = null;
+        $data->kategori_id = null;
+        $data->save();
+
         $data->delete();
 
-        return redirect('produk')->with('msg', 'Produk succesfully deleted');
+        if ($oldKategoriId !== null) {
+            $kategoriName = Kategori::find($oldKategoriId)->nama_kategori;
+            DB::table('kategori')->where('id_kategori', $oldKategoriId)->update(['nama_kategori' => $kategoriName]);
+        }
+
+        if ($oldPemasokId !== null) {
+            $pemasokName = Pemasok::find($oldPemasokId)->nama_pemasok;
+            DB::table('pemasok')->where('id_pemasok', $oldPemasokId)->update(['nama_pemasok' => $pemasokName]);
+        }
+
+        return redirect('produk')->with('msg', 'Produk successfully deleted');
     }
 }

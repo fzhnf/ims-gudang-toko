@@ -12,6 +12,6 @@ class KategoriSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Kategori::factory(5)->create();
+        \App\Models\Kategori::factory(10)->create();
     }
 }

@@ -11,7 +11,7 @@ class StoreProdukRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,11 +22,11 @@ class StoreProdukRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'txtnamaproduk' => 'required',
-        'txtharga' => 'required',
-        'txtstok' => 'required',
-        'txtpemasok' => 'required',
-        'txtkategori' => 'required',
+        'txtproduk' => 'required|string|max:255',
+        'txtkategori' => 'string|max:255',
+        'txtpemasok' => 'string|max:255',
+        'txtkuantitas' => 'required|string|max:255',
+        'txthargaperpcs' => 'required|string|max:255',
         ];
     }
 }
